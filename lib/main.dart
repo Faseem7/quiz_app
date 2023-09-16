@@ -63,7 +63,7 @@ class _QuizPageState extends State<QuizPage> {
               },
               child: const Text('True',style: TextStyle(
                 color: Colors.black
-              ),),
+              ,fontSize: 20),),
             ),
           ),
         ),
@@ -77,7 +77,8 @@ class _QuizPageState extends State<QuizPage> {
               },
               child: const Text(
                 'False',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black,
+                fontSize:20),
               ),
             ),
           ),

@@ -31,16 +31,37 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  void hai() {}
+  List<Icon> scoreKeeper = [
+    const Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    const Icon(Icons.close, color: Colors.red),
+    const Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    const Icon(Icons.close, color: Colors.red),
+    const Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    const Icon(Icons.close, color: Colors.red),
+    const Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    const Icon(Icons.close, color: Colors.red),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         const Expanded(
-          flex:5,
+          flex: 5,
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
@@ -55,15 +76,19 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.green
-              ),
+              style: TextButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
-                hai();
+                setState(() {
+                  scoreKeeper.add(
+                    const Icon(Icons.check,
+                    color: Colors.green,),
+                  );
+                });
               },
-              child: const Text('True',style: TextStyle(
-                color: Colors.black
-              ,fontSize: 20),),
+              child: const Text(
+                'True',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
             ),
           ),
         ),
@@ -73,15 +98,23 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
-                hai();
+                setState(() {
+                  scoreKeeper.add(
+                    const Icon(Icons.close,
+                      color: Colors.red,
+                    ),
+                  );
+                });
               },
               child: const Text(
                 'False',
-                style: TextStyle(color: Colors.black,
-                fontSize:20),
+                style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
           ),
+        ),
+        Row(
+          children: scoreKeeper,
         ),
       ],
     );

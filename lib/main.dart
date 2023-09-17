@@ -31,28 +31,21 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    const Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    const Icon(Icons.close, color: Colors.red),
-    const Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    const Icon(Icons.close, color: Colors.red),
-    const Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    const Icon(Icons.close, color: Colors.red),
-    const Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    const Icon(Icons.close, color: Colors.red),
+  int questionNumber = 0;
+  List<String> questions = [
+    'The total length of the Great Wall of China adds up to 13,171 miles.', //true
+    'Mount Everest is the tallest mountain in the world.', //true
+    'New York City is composed of between 36 and 42 islands.', //true
+    'The goat is the national animal of Scotland.', //false
+    'An octopus has seven hearts.', //false
+    'The hummingbird egg is the world\'s smallest bird egg.', //true,
+    'congrats',
+    'nothing'
   ];
+
+  List<bool> answers = [true, true, true, false, false, true,true,true,true];
+
+  List<Icon> scoreKeeper = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +53,13 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This Is Where The Questions Will Go',
+                questions[questionNumber],
                 style: TextStyle(color: Colors.white, fontSize: 25.0),
               ),
             ),
@@ -78,11 +71,20 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == true) {
+                  setState(() {
+                    scoreKeeper.add(Icon(Icons.check,
+                    color:Colors.green));
+                  });
+                }else{
+                  setState(() {
+                    scoreKeeper.add(Icon(Icons.close,
+                    color: Colors.red,));
+                  });
+                }
                 setState(() {
-                  scoreKeeper.add(
-                    const Icon(Icons.check,
-                    color: Colors.green,),
-                  );
+                  questionNumber++;
                 });
               },
               child: const Text(
@@ -98,12 +100,20 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
+                 bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == false) {
+                  setState(() {
+                    scoreKeeper.add(Icon(Icons.check,
+                    color:Colors.green));
+                  });
+                } else {
+                  setState(() {
+                    scoreKeeper.add(Icon(Icons.close,
+                    color:Colors.red));
+                  });
+                }
                 setState(() {
-                  scoreKeeper.add(
-                    const Icon(Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
+                  questionNumber++;
                 });
               },
               child: const Text(

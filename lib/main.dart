@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() {
   runApp(const QuizApp());
@@ -32,19 +33,15 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   int questionNumber = 0;
-  List<String> questions = [
-    'The total length of the Great Wall of China adds up to 13,171 miles.', //true
-    'Mount Everest is the tallest mountain in the world.', //true
-    'New York City is composed of between 36 and 42 islands.', //true
-    'The goat is the national animal of Scotland.', //false
-    'An octopus has seven hearts.', //false
-    'The hummingbird egg is the world\'s smallest bird egg.', //true,
-    'congrats',
-    'nothing'
+
+  List<Question> questionBank = [
+    Question('The total length of the Great Wall of China adds up to 13,171 miles.',true),
+    Question('Mount Everest is the tallest mountain in the world.', true),
+    Question('New York City is composed of between 36 and 42 islands.', true),
+    Question('The goat is the national animal of Scotland.', false),
+    Question('An octopus has seven hearts.', false),
+    Question('The hummingbird egg is the world\'s smallest bird egg.', true),
   ];
-
-  List<bool> answers = [true, true, true, false, false, true,true,true,true];
-
   List<Icon> scoreKeeper = [];
 
   @override
@@ -56,11 +53,11 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
-                style: TextStyle(color: Colors.white, fontSize: 25.0),
+                questionBank[questionNumber].q,
+                style: const TextStyle(color: Colors.white, fontSize: 25.0),
               ),
             ),
           ),
@@ -71,16 +68,17 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = questionBank[questionNumber].b;
                 if (correctAnswer == true) {
                   setState(() {
-                    scoreKeeper.add(Icon(Icons.check,
-                    color:Colors.green));
+                    scoreKeeper.add(const Icon(Icons.check, color: Colors.green));
                   });
-                }else{
+                } else {
                   setState(() {
-                    scoreKeeper.add(Icon(Icons.close,
-                    color: Colors.red,));
+                    scoreKeeper.add(const Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    ));
                   });
                 }
                 setState(() {
@@ -100,16 +98,14 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
-                 bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = questionBank[questionNumber].b;
                 if (correctAnswer == false) {
                   setState(() {
-                    scoreKeeper.add(Icon(Icons.check,
-                    color:Colors.green));
+                    scoreKeeper.add(const Icon(Icons.check, color: Colors.green));
                   });
                 } else {
                   setState(() {
-                    scoreKeeper.add(Icon(Icons.close,
-                    color:Colors.red));
+                    scoreKeeper.add(const Icon(Icons.close, color: Colors.red));
                   });
                 }
                 setState(() {

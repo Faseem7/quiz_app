@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
 
+Quizbrain quizbrain = Quizbrain();
 void main() {
   runApp(const QuizApp());
 }
@@ -34,14 +35,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   int questionNumber = 0;
 
-  List<Question> questionBank = [
-    Question('The total length of the Great Wall of China adds up to 13,171 miles.',true),
-    Question('Mount Everest is the tallest mountain in the world.', true),
-    Question('New York City is composed of between 36 and 42 islands.', true),
-    Question('The goat is the national animal of Scotland.', false),
-    Question('An octopus has seven hearts.', false),
-    Question('The hummingbird egg is the world\'s smallest bird egg.', true),
-  ];
   List<Icon> scoreKeeper = [];
 
   @override
@@ -56,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionBank[questionNumber].q,
+                quizbrain.questionBank[questionNumber].q,
                 style: const TextStyle(color: Colors.white, fontSize: 25.0),
               ),
             ),
@@ -68,10 +61,11 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
-                bool correctAnswer = questionBank[questionNumber].b;
+                bool correctAnswer = quizbrain.questionBank[questionNumber].b;
                 if (correctAnswer == true) {
                   setState(() {
-                    scoreKeeper.add(const Icon(Icons.check, color: Colors.green));
+                    scoreKeeper
+                        .add(const Icon(Icons.check, color: Colors.green));
                   });
                 } else {
                   setState(() {
@@ -98,10 +92,11 @@ class _QuizPageState extends State<QuizPage> {
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () {
-                bool correctAnswer = questionBank[questionNumber].b;
+                bool correctAnswer = quizbrain.questionBank[questionNumber].b;
                 if (correctAnswer == false) {
                   setState(() {
-                    scoreKeeper.add(const Icon(Icons.check, color: Colors.green));
+                    scoreKeeper
+                        .add(const Icon(Icons.check, color: Colors.green));
                   });
                 } else {
                   setState(() {
